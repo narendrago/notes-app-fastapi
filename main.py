@@ -4,14 +4,14 @@ from routers import notes
 import uvicorn
 
 
-app=FastAPI(swagger_ui_parameters={"syntaxHighlight":True})
+app=FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(notes.router)
+app.include_router(notes.router,tags=["Notes"],prefix="/v1/notes")
 
 @app.get("/")
 async def home():
